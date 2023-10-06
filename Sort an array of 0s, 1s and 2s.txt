@@ -1,0 +1,20 @@
+voidsort(int arr[],int n){
+int left=0;
+int righ=n-1;
+int curr=0;
+while(curr<right){
+if(arr[curr]==0){
+swap(arr[curr],arr[left]);
+left++;
+curr++;
+}
+else if(arr[curr]==2){
+swap(arr[curr],arr[right});
+right--;
+}
+else{
+curr++;
+}
+}
+}
+;
