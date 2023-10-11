@@ -1,0 +1,32 @@
+Dummy node method
+      if(head==NULL)return head;
+        Node* zeronode=new Node(0);
+        Node* onenode=new Node(0);
+        Node* twonode=new Node(0);
+        Node* zero=zeronode,*one =onenode,* two=twonode;
+        Node* curr=head;
+        while(curr!=NULL){
+            if(curr->data==0){
+                zero->next=curr;
+                zero=zero->next;
+            }else if(curr->data==1){
+                one->next=curr;
+                one=one->next;
+            }
+            else if(curr->data==2){
+                two->next=curr;
+                two=two->next;
+            }
+            curr=curr->next;
+        }
+        zero->next=(onenode->next!=NULL ? onenode->next:twonode->next);
+        one->next=twonode->next;
+        two->next=nullptr;
+        head=zeronode->next;
+         delete zeronode;
+        delete onenode;
+        delete twonode;
+
+        return head;
+    }
+    };
