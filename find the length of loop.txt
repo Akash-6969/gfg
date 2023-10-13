@@ -1,0 +1,21 @@
+int countnode(struct Node* n){
+   int res = 1;
+   struct Node* temp = n->next; // Start with the node where the loop was detected
+   while(temp != n){
+       res++;
+       temp = temp->next;
+   }
+   return res;
+}
+
+int countNodesinLoop(struct Node *head) {
+    struct Node* slow = head, *fast = head;
+    while (slow != NULL && fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) {
+            return countnode(slow);
+        }
+    }
+    return 0; // No loop detected
+}
