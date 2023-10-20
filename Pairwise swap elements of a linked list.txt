@@ -1,0 +1,29 @@
+class Solution
+
+public:
+    Node* pairWiseSwap(struct Node* head) 
+    {
+        // Handle the case of an empty list or a list with only one node
+        if (head == NULL || head->next == NULL) {
+            return head;
+        }
+
+        // Initialize pointers for swapping
+        struct Node* prev = head;
+        struct Node* curr = head->next->next;
+        head=head->next;
+        head->next=prev;
+        while(curr!=NULL && curr->next!=NULL){
+            prev->next=curr->next;
+            prev=curr;
+            struct Node* temp=curr->next->next;
+            curr->next->next=curr;
+            curr=temp;
+        }
+        prev->next=curr;
+        return head;
+
+       
+     
+    }
+};
