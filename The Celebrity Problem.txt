@@ -1,0 +1,46 @@
+class Solution {
+private:
+    // Function to find if there is a celebrity in the party or not.
+    bool knows(vector<vector<int> >& M, int a, int b) {
+        return M[a][b] == 1;
+    }
+
+public:
+    int celebrity(vector<vector<int> >& M, int n) {
+        // Stack to track potential celebrity candidates.
+        stack<int> s;
+
+        // Push all people onto the stack.
+        for (int i = 0; i < n; i++) {
+            s.push(i);
+        }
+
+        // While there are at least two people in the stack.
+        while (s.size() > 1) {
+            int a = s.top();
+            s.pop();
+            int b = s.top();
+            s.pop();
+
+            if (knows(M, a, b)) {
+                // If a knows b, then a cannot be the celebrity.
+                s.push(b);
+            } else {
+                // If a does not know b, then b cannot be the celebrity.
+                s.push(a);
+            }
+        }
+
+        // Potential celebrity candidate.
+        int candidate = s.top();
+
+        // Check if the candidate is known by everyone (rowCheck) and doesn't know anyone (colCheck).
+        for (int i = 0; i < n; i++) {
+            if (i != candidate && (knows(M, candidate, i) || !knows(M, i, candidate))) {
+                return -1; // The candidate does not meet the conditions of a celebrity.
+            }
+        }
+
+        return candidate; // The candidate is a celebrity.
+    }
+};
