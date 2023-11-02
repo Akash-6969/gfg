@@ -1,0 +1,54 @@
+This method will take o(nlogn) time complexity
+
+int kthSmallest(int arr[], int l, int r, int k) {
+        //code here
+        sort(arr,arr+r+1);
+        return arr[k-1];
+    }
+};
+
+int kthLargest(int arr[], int l, int r, int k) {
+ sort(arr,arr+r+1);
+return arr[n-k];
+}
+};
+
+
+for decrease the complexity we use quick select algorithm which take time o(n)
+it sort the array about the particular pivot element just similar to quick sort
+
+
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            std::swap(arr[i], arr[j]);
+        }
+    }
+
+     swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+int kthSmallest(int arr[], int low, int high, int k) {
+    if (k > 0 && k <= high - low + 1) {
+        int partitionIndex = partition(arr, low, high);
+
+        if (partitionIndex - low == k - 1) {
+            return arr[partitionIndex];
+        } else if (partitionIndex - low > k - 1) {
+            return kthSmallest(arr, low, partitionIndex - 1, k);
+        } else {
+            return kthSmallest(arr, partitionIndex + 1, high, k - (partitionIndex - low + 1));
+        }
+    }
+
+    // If k is out of range, return an invalid value or handle the error as needed.
+    return -1; // You can choose a different value or error handling approach here.
+}
+
+
+};
