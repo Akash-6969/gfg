@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if (dividend == INT_MIN && divisor == -1) {
+            // Handling overflow case
+            return INT_MAX;
+        }
+         int sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : 1;
+        long long int absDividend = abs(static_cast<long long>(dividend));
+        long long int absDivisor = abs(static_cast<long long>(divisor));
+
+        long long int quo = 0, temp = 0;
+        for (int i = 31; i >= 0; --i) {
+            if (temp + (absDivisor << i) <= absDividend) {
+                temp += absDivisor << i;
+                quo += 1ll << i;
+            }
+        }
+
+        if (sign == -1) quo = -quo;
+        return static_cast<int>(quo);
+    }
+};
