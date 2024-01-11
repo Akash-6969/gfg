@@ -1,0 +1,35 @@
+class Solution {
+public:
+int n;
+ vector<string>result;
+ bool isValid(string str){
+     if(str[0]=='0')return false;
+     int val=stoi(str);
+     return val<=255;
+ }
+     void solve(string& s,int indx,int part, string curr ){
+    if(indx==n && part==4){
+        curr.pop_back();
+        result.push_back(curr);
+    
+    }
+    if(indx+1<=n){
+        solve(s,indx+1,part+1,curr+s.substr(indx,1)+".");
+    }
+    if(indx+2<=n &&  isValid(s.substr(indx,2))){
+         solve(s,indx+2,part+1,curr+s.substr(indx,2)+".");
+    }
+    if(indx+3<=n && isValid(s.substr(indx,3))){
+         solve(s,indx+3,part+1,curr+s.substr(indx,3)+".");
+    }
+}
+    vector<string> restoreIpAddresses(string s) {
+        result.clear();
+        n=s.size();
+        if(n>12)return {};
+        int part=0;
+        string curr="";
+        solve(s,0,part,curr);
+        return result;
+    }
+};

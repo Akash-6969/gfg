@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+       int k=1;
+       int left=0;
+       int right=0;
+       int maxcount=0;
+       int windowcount=0;
+       while(right<nums.size()){
+           if(nums[right]==0){
+               windowcount++;
+           }
+           while(windowcount>k){
+             if(nums[left]==0){
+               windowcount--;
+             }
+             left++;  
+           }
+           maxcount=max(maxcount,right-left);
+           right++;
+       }
+    
+       
+       return maxcount;
+    }
+    };
