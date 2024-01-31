@@ -1,0 +1,17 @@
+class RecentCounter {
+    
+public:
+    RecentCounter() {
+        
+    }
+    
+    int ping(int t) {
+        ans.push(t);
+        while(!ans.empty() && ans.front()<t-3000){
+            ans.pop();
+
+        }
+        return ans.size();
+    }
+     private:queue<int>ans;
+};

@@ -1,0 +1,80 @@
+1st approach push the code in vector and then take two pointer one at start and other at end
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        vector<int>ans;
+        ListNode* curr=head;
+        while(curr!=NULL){
+            ans.push_back(curr->val);
+            curr=curr->next;
+        }
+        
+        int result=0;
+        int i=0;
+        int j=ans.size()-1;
+        while(i<j){
+            result=max(result,ans[i]+ans[j]);
+            i++;
+            j--;
+        }
+        
+        return result;
+    }
+};
+
+2 method 
+is using stack to first store the value then run the loop to n/2 of size of stack
+
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        stack<int>s;
+        ListNode* curr=head;
+        while(curr!=NULL){
+            s.push(curr->val);
+            curr=curr->next;
+        }
+        int n=s.size();
+        int count=1;
+        curr=head;
+        int result=0;
+        while(count<=n/2){
+            result=max(result,curr->val+s.top());
+            curr=curr->next;
+            s.pop();
+            count++;
+        }
+        return result;
+    }
+};
+Method-3:
+first we find the mid of linkedlist and reverse the second half of linkedlist and plac
+two pointer one the first Linkedlist and second of reverse head linkedlist
+class Solution {
+public:
+    int pairSum(ListNode* head) {
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        ListNode* mid=slow;
+        ListNode* prev=NULL;
+        ListNode* nextnode=NULL;
+        while(mid!=NULL){
+            nextnode=mid->next;
+            mid->next=prev;
+            prev=mid;
+            mid=nextnode;
+        }
+        int result=0;
+        ListNode* curr=head;
+        while(prev!=NULL){
+            result=max(result,curr->val+prev->val);
+            curr=curr->next;
+            prev=prev->next;
+        }
+        return result;
+    }
+};
