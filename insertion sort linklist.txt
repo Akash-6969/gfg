@@ -1,0 +1,27 @@
+class Solution {
+public:
+    ListNode* insertionSortList(ListNode* head) {
+        vector<int>ans;
+        if(head==NULL)return NULL;
+        while(head!=NULL){
+           ans.push_back(head->val);
+           head=head->next;
+           sort(ans.begin(),ans.end());
+           }
+
+        ListNode* curr=NULL;
+        ListNode* newhead=NULL;
+        for(auto val:ans ){
+            if(!newhead){
+                newhead =new ListNode(val);
+                curr=newhead;
+            }
+            else{
+                curr->next=new ListNode(val);
+                curr=curr->next;
+            }
+        }
+        return newhead;
+
+    }
+};

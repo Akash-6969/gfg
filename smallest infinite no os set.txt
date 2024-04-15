@@ -1,0 +1,31 @@
+class SmallestInfiniteSet {
+public:
+int current;
+priority_queue<int,vector<int>,greater<int>>pq;
+unordered_set<int>st;
+    SmallestInfiniteSet() {
+        current=1;
+    }
+    
+    int popSmallest() {
+        int result;
+        if(!pq.empty()){
+            result=pq.top();
+            pq.pop();
+            st.erase(result);
+        }else{
+            result=current;
+            current+=1;
+
+        }
+        return result;
+    }
+    
+    void addBack(int num) {
+        if(num>=current  || st.find(num)!=st.end()){
+            return ;
+        }
+        st.insert(num);
+        pq.push(num);
+    }
+};

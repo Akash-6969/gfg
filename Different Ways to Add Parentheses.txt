@@ -1,0 +1,35 @@
+#include <vector>
+#include <string>
+
+ in this we create no of tree to slove the question and when we find *,+,- in left and right tree of lowest order we perform the operation .
+using namespace std;
+
+class Solution {
+public:
+    vector<int> diffWaysToCompute(string exp) {
+        vector<int> ans;
+        for (int indx = 0; indx < exp.length(); indx++) {
+            char curr = exp[indx];
+            if (curr == '*'|| curr == '+' || curr == '-') {
+                vector<int> left, right;
+  This create the left sub Tree 
+                left = diffWaysToCompute(exp.substr(0, indx));
+ ans this create the right sub tree
+                right = diffWaysToCompute(exp.substr(indx + 1));
+                for (auto i : left) {
+                    for (auto j : right) {
+                        if (curr == '*')
+                            ans.push_back(i * j);
+                        else if (curr == '+')
+                            ans.push_back(i + j);
+                        else
+                            ans.push_back(i - j);
+                    }
+                }
+            }
+        }
+        if (ans.empty())
+            ans.push_back(stoi(exp));
+        return ans;
+    }
+};
