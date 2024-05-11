@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool findifkbitset(int k, unsigned int A) {
+        return ((1 << (k - 1)) & A) != 0;
+    }
+
+    uint32_t reverseBits(uint32_t n) {
+        unsigned int ans = 0;
+        for (int i = 1; i <= 32; i++) {
+            if (findifkbitset(i, n))
+                ans |= 1 << (32 - i);
+        }
+        return ans;
+    }
+};

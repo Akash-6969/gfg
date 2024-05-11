@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+ we use AB>BA algo to check where the no we form is largest no
+
+Example like num=[3,30,34,9]
+for fisrt we take A=3, B=30 then compare them if (AB>BA) the B shift to next element else swap or sort it or insrt A to B and B to A
+using namespace std;
+
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        vector<string> numStrings;
+        
+        // Convert integers to strings
+        for (int num : nums) {
+            numStrings.push_back(to_string(num));
+        }
+        
+        // Sort the strings using custom comparator
+        sort(numStrings.begin(), numStrings.end(), customCompare);
+        
+        // Handle case where all numbers are 0
+        if (numStrings[0] == "0") {
+            return "0";
+        }
+        
+        // Concatenate the sorted strings to form the largest number
+        string largestNum;
+        for (const string& numStr : numStrings) {
+            largestNum += numStr;
+        }
+        
+        return largestNum;
+    }
+
+private:
+    // Custom comparator function to sort numbers in a way that forms the largest number
+    static bool customCompare(const string& a, const string& b) {
+        return (a + b) > (b + a);
+    }
+};
+
+

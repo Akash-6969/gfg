@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+       unordered_set<char> row1{'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'};
+        unordered_set<char> row2{'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'};
+        unordered_set<char> row3{'z', 'x', 'c', 'v', 'b', 'n', 'm'};
+        
+        vector<string> result;
+        
+        for (auto word:words) {
+            unordered_set<char> wordset;
+            for (char c : word) {
+                wordset.insert(tolower(c));
+            }
+            
+            if (isSubset(row1, wordset) || isSubset(row2, wordset) || isSubset(row3, wordset)) {
+                result.push_back(word);
+            }
+        }
+        
+        return result;
+    }
+    
+private:
+    bool isSubset(const unordered_set<char>& set1, const unordered_set<char>& set2) {
+        for (char c : set2) {
+            if (set1.find(c) == set1.end()) {
+                return false;
+            }
+        }
+        return true;
+    }
+};
