@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Convert Binary Number in a Linked List to Integer
 
 Hint
@@ -33,3 +34,40 @@ public:
         return sum;
     }
 };
+=======
+Convert Binary Number in a Linked List to Integer
+
+Hint
+Given head which is a reference node to a singly-linked list. The value of each node in the linked list is either 0 or 1. The linked list holds the binary representation of a number.
+
+Return the decimal value of the number in the linked list.
+
+The most significant bit is at the head of the linked list.
+
+Input: head = [1,0,1]
+Output: 5
+Explanation: (101) in base 2 = (5) in base 10
+
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        string st = "";
+        
+        // Traverse the linked list and build the binary string
+        while (head) {
+            st += to_string(head->val); // Convert the integer to a string and append it
+            head = head->next;
+        }
+        
+        int sum = 0;
+        int n = st.size();
+        
+        // Convert the binary string to decimal
+        for (int i = 0; i < n; i++) {
+            sum += (st[i] - '0') * pow(2, n - i - 1); // Convert char to int, then calculate power of 2
+        }
+        
+        return sum;
+    }
+};
+>>>>>>> 05092e0 (asf)

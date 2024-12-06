@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 You are given an array coordinates, coordinates[i] = [x, y], where [x, y] represents the coordinate of a point. Check if these points make a straight line in the XY plane.
 
 
@@ -19,4 +20,27 @@ public:
          }
          return true;
     }
+=======
+You are given an array coordinates, coordinates[i] = [x, y], where [x, y] represents the coordinate of a point. Check if these points make a straight line in the XY plane.
+
+
+Solution:
+
+
+ class Solution {
+public:
+    bool checkStraightLine(vector<vector<int>>& coordinates) {
+        int n=coordinates.size();
+         int x_diff=coordinates[1][0]-coordinates[0][0];
+         int y_diff=coordinates[1][1]-coordinates[0][1];
+         for(int i=2;i<n;i++){
+            int currx=coordinates[i][0]-coordinates[0][0];
+            int curry=coordinates[i][1]-coordinates[0][1];
+            if(currx*y_diff!=curry*x_diff){
+                return false;
+            }
+         }
+         return true;
+    }
+>>>>>>> 05092e0 (asf)
 };
